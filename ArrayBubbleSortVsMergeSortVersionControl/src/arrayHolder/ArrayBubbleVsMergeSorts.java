@@ -2,9 +2,6 @@
  * @author Larry Shannon
  *  * CSC 201 section 010N
  * This program uses modular structure to compare two sort algorithms.
- * The global variables bCount and mCount track the number of comparisons
- * done in each of the sorts. bCount for the bubble sort, 
- * and mCount for the merge sort.
  * Note I have also included some commented out methods. 
  * The methods show how to sort parallel arrays using the bubble sort.
  * I use the bubble sort, even though it is not the most efficient sort.
@@ -56,8 +53,6 @@ import java.util.Scanner;
 public class ArrayBubbleVsMergeSorts
 {
 	private static Scanner keyboard = new Scanner(System.in);
-	private static int mCount = 0;
-	private static int bCount = 0;
 
 	/**
 	 * @param args
@@ -74,13 +69,13 @@ public class ArrayBubbleVsMergeSorts
 			myArrayI = buildDoubleArray();
 			myArrayII = myArrayI.clone();//duplicateDoubleArray(myArrayI);
 			//			printArray(myArrayI);
-			mCount = 0;
+			
 			mergeSortArray(myArrayII);
-			System.out.printf("It took %d compares to sort with the merge sort.\n", mCount);
+			System.out.printf("It took %d compares to sort with the merge sort.\n");
 			//			printArray(myArrayII);
-			bCount = 0;
+			
 			bubbleSortArray(myArrayI);
-			System.out.printf("It took %d compares to sort with the bubble sort.\n", bCount);
+			System.out.printf("It took %d compares to sort with the bubble sort.\n");
 			//			printArray(myArrayI);
 			yesNo = repeatProcessQuery();
 		} while (yesNo.equals("yes"));
@@ -93,20 +88,18 @@ public class ArrayBubbleVsMergeSorts
 	 * @Arguments pMyArray, reference to array to sort
 	 * Since the reference to the array is used, any changes to the array 
 	 * are made in the original array.
-	 * bCount is a global counter variable.
-	 * bCount is incremented each time a comparison is made.
 	 */
 	private static void bubbleSortArray(double[] pMyArray)
 	{
 		int arraySize = pMyArray.length;
 		double myTemp = 0;
-		//bCount++;
-		for (int pass = arraySize - 1; pass > 0; pass--, bCount++)
+		
+		for (int pass = arraySize - 1; pass > 0; pass--)
 		{
-			//bCount++;
-			for (int index = 0, indexI = 1; index < pass; index++, indexI++, bCount++)
+			
+			for (int index = 0, indexI = 1; index < pass; index++, indexI++)
 			{
-				bCount++;
+				
 				if (pMyArray[index] > pMyArray[indexI])
 				{
 					// swapElements
@@ -151,15 +144,15 @@ public class ArrayBubbleVsMergeSorts
 			myTempArrayI = new double[splitSizeI];
 			myTempArrayII = new double[splitSizeII];
 			//			mCount++;
-			for (indexI = 0; indexI < splitSizeI; indexI++, index++, mCount++)
+			for (indexI = 0; indexI < splitSizeI; indexI++, index++)
 				myTempArrayI[indexI] = pMyArray[index];
 			//			mCount++;
-			for (indexII = 0; indexII < splitSizeII; indexII++, index++, mCount++)
+			for (indexII = 0; indexII < splitSizeII; indexII++, index++)
 				myTempArrayII[indexII] = pMyArray[index];
 			mergeSortArray(myTempArrayI);
 			mergeSortArray(myTempArrayII);
 			//			mCount++;
-			for (index = 0, indexI = 0, indexII = 0; index < arraySize; index++, mCount++)
+			for (index = 0, indexI = 0, indexII = 0; index < arraySize; index++)
 			{
 				//				mCount++;
 				if (indexI < splitSizeI)
@@ -167,7 +160,7 @@ public class ArrayBubbleVsMergeSorts
 					//					mCount++;
 					if (indexII < splitSizeII)
 					{
-						mCount++;
+						
 						if (myTempArrayI[indexI] < myTempArrayII[indexII])
 						{
 							pMyArray[index] = myTempArrayI[indexI];
@@ -198,9 +191,9 @@ public class ArrayBubbleVsMergeSorts
 		}
 		else //executed if the array is 3 or smaller
 		{
-			bCount = 0;
+			
 			bubbleSortArray(pMyArray);
-			mCount += bCount;
+			
 		}
 
 	}
